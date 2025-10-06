@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 const privileges = [
   {
@@ -299,6 +301,18 @@ const creators = [
 
 export default function Index() {
   const [onlineCount] = useState(347);
+  const [nickname, setNickname] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handlePurchase = () => {
+    if (nickname.trim().length < 3) {
+      alert('Введите корректный никнейм (минимум 3 символа)');
+      return;
+    }
+    window.open('https://funpay.com/users/16724676/', '_blank');
+    setIsDialogOpen(false);
+    setNickname('');
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -400,10 +414,46 @@ export default function Index() {
             <div className="text-center">
               <div className="text-6xl font-black text-secondary text-shadow mb-4">1₽ = 1 TOKEN</div>
               <p className="text-muted-foreground text-lg mb-6">Используйте токены для покупок на сервере</p>
-              <Button className="w-full gradient-purple-pink hover:gradient-hover border-0 minecraft-shadow font-bold text-lg py-6" size="lg">
-                <Icon name="ShoppingCart" className="mr-2" size={20} />
-                Купить токены
-              </Button>
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button className="w-full gradient-purple-pink hover:gradient-hover border-0 minecraft-shadow font-bold text-lg py-6" size="lg">
+                    <Icon name="ShoppingCart" className="mr-2" size={20} />
+                    Купить токены
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-black">Покупка токенов</DialogTitle>
+                    <DialogDescription className="text-base">
+                      Введите ваш игровой никнейм для продолжения покупки
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 py-4">
+                    <div className="space-y-2">
+                      <label htmlFor="nickname" className="text-sm font-medium">
+                        Игровой никнейм
+                      </label>
+                      <Input
+                        id="nickname"
+                        placeholder="Ваш ник в Minecraft"
+                        value={nickname}
+                        onChange={(e) => setNickname(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handlePurchase()}
+                        className="text-base"
+                      />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button
+                      onClick={handlePurchase}
+                      className="w-full gradient-purple-pink hover:gradient-hover border-0 minecraft-shadow font-bold"
+                      size="lg"
+                    >
+                      Продолжить покупку
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
           </CardContent>
         </Card>
@@ -452,10 +502,46 @@ export default function Index() {
                     })}
                   </ul>
                 </div>
-                <Button className="w-full bg-white/20 hover:bg-white/30 border-0 minecraft-shadow-sm font-bold backdrop-blur">
-                  <Icon name="ShoppingBag" className="mr-2" size={18} />
-                  Purchase
-                </Button>
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-full bg-white/20 hover:bg-white/30 border-0 minecraft-shadow-sm font-bold backdrop-blur">
+                      <Icon name="ShoppingBag" className="mr-2" size={18} />
+                      Купить
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl font-black">Покупка привилегии</DialogTitle>
+                      <DialogDescription className="text-base">
+                        Введите ваш игровой никнейм для продолжения покупки
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                      <div className="space-y-2">
+                        <label htmlFor="nickname" className="text-sm font-medium">
+                          Игровой никнейм
+                        </label>
+                        <Input
+                          id="nickname"
+                          placeholder="Ваш ник в Minecraft"
+                          value={nickname}
+                          onChange={(e) => setNickname(e.target.value)}
+                          onKeyDown={(e) => e.key === 'Enter' && handlePurchase()}
+                          className="text-base"
+                        />
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <Button
+                        onClick={handlePurchase}
+                        className="w-full gradient-purple-pink hover:gradient-hover border-0 minecraft-shadow font-bold"
+                        size="lg"
+                      >
+                        Продолжить покупку
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </CardContent>
             </Card>
           ))}
