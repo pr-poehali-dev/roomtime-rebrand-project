@@ -148,54 +148,73 @@ const privileges = [
       '› /time ⇨ Установить время',
       '› /weather ⇨ Установить погоду',
       '› /loom ⇨ Открыть Ткацкий станок',
-      '› /carttable ⇨ Открыть Стол картографа',
-      '› /msgtoggle ⇨ Отключить Личные сообщения',
-      '› /beezooka ⇨ Выстрельнуть пчелой',
-      '› /kittycannon ⇨ Выстрелить котом',
-      '› /firework ⇨ Настроить феерверк',
-      '› /name ⇨ Изменить назв. предмета цветным'
+      '› /cartography ⇨ Открыть Картографический стол',
+      '› /smithing ⇨ Открыть Кузнечный стол',
+      '› /grindstone ⇨ Открыть Точило',
+      '› /stonecutter ⇨ Открыть Камнерез',
+      '› /anvil ⇨ Открыть Наковальню',
+      '› /lore ⇨ Изменить описание предмета',
+      '› /enchant ⇨ Зачаровать предмет',
+      '› /skull ⇨ Получить голову игрока',
+      '',
+      'Прочее:',
+      'Доступно Точек домов: 4',
+      'Регионов (Гриф): 5 по 150,000 блоков',
+      'Регионов (Анка): 7 блоков',
+      'Слотов на Аукционе: 12',
+      'Задержка телепорта: 3 сек',
+      '✔️ Возможности привилегии ниже'
     ]
   },
   {
     name: 'Титан',
-    price: 239,
-    color: 'from-indigo-600 to-indigo-700',
+    price: 345,
+    color: 'from-red-600 to-red-700',
     features: [
       '⚕ Префикс в чате и табе: [Титан] ВашНик',
       '› /kit Титан ⇨ Получить набор Титана',
-      '› Все возможности Элиты',
-      '› Увеличенный лимит регионов',
-      '› Больше слотов на аукционе'
-    ]
-  },
-  {
-    name: 'Принц',
-    price: 329,
-    color: 'from-pink-600 to-pink-700',
-    features: [
-      '⚕ Префикс в чате и табе: [Принц] ВашНик',
-      '› /kit Принц ⇨ Получить набор Принца',
-      '› Все возможности Титана',
-      '› Эксклюзивные команды',
-      '› VIP-статус на сервере'
+      '› /god ⇨ Режим Бога',
+      '› /fly ⇨ Режим полета',
+      '› /speed ⇨ Изменить скорость',
+      '› /tp Ник ⇨ Телепортация к игроку',
+      '',
+      'Прочее:',
+      'Доступно Точек домов: 5',
+      'Регионов (Гриф): 7 по 200,000 блоков',
+      'Регионов (Анка): 9 блоков',
+      'Слотов на Аукционе: 14',
+      'Задержка телепорта: 2 сек',
+      '✔️ Возможности привилегии ниже'
     ]
   },
   {
     name: 'Князь',
-    price: 549,
-    color: 'from-red-600 to-red-700',
+    price: 749,
+    color: 'from-pink-600 to-rose-600',
     features: [
       '⚕ Префикс в чате и табе: [Князь] ВашНик',
       '› /kit Князь ⇨ Получить набор Князя',
-      '› Все возможности Принца',
-      '› Расширенные права',
-      '› Премиум поддержка'
+      '› Все возможности Титана',
+      '› Премиум техподдержка',
+      '› Расширенные возможности'
+    ]
+  },
+  {
+    name: 'Принц',
+    price: 999,
+    color: 'from-indigo-600 to-purple-700',
+    features: [
+      '⚕ Префикс в чате и табе: [Принц] ВашНик',
+      '› /kit Принц ⇨ Получить набор Принца',
+      '› Все возможности Князя',
+      '› VIP статус в игре',
+      '› Особые бонусы и привилегии'
     ]
   },
   {
     name: 'Герцог',
-    price: 999,
-    color: 'from-yellow-500 to-orange-600',
+    price: 1399,
+    color: 'from-amber-600 to-orange-700',
     features: [
       '⚕ Префикс в чате и табе: [Герцог] ВашНик',
       '› /kit Герцог ⇨ Получить набор Герцога',
@@ -314,320 +333,339 @@ export default function Index() {
     setNickname('');
   };
 
-  return (
-    <div className="min-h-screen bg-background">
-      <div className="relative overflow-hidden py-16 md:py-24">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-secondary/20 opacity-50" />
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center space-y-8">
-            <h1 className="text-6xl md:text-8xl font-black text-shadow bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent uppercase tracking-tight">
-              *ROOMTIME<br/>MINECRAFT SERVER*
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-              Трумтайм Майнкрафт: Сродідер сентерт, грайделіґн сцанд цомент тудіцт.
-            </p>
+  const averageRating = (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1);
+  const fiveStarCount = reviews.filter(r => r.rating === 5).length;
+  const fourStarCount = reviews.filter(r => r.rating === 4).length;
 
-            <div className="flex flex-wrap gap-4 justify-center items-center">
-              <Card className="bg-card/80 backdrop-blur-lg border-primary/30">
-                <CardContent className="p-4 flex items-center gap-3">
-                  <Icon name="Server" className="text-primary" size={28} />
-                  <div className="text-left">
-                    <p className="text-sm text-muted-foreground font-medium">IP Сервера</p>
-                    <p className="font-bold text-lg">RoomTime.gomc.me</p>
-                  </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Хедер */}
+      <header className="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-md">
+                <Icon name="Gamepad2" className="text-white" size={24} />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">RoomTime</h1>
+                <p className="text-xs text-gray-500">Minecraft сервер</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                {onlineCount} онлайн
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Главный баннер */}
+      <section className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-4">Донат магазин RoomTime</h2>
+            <p className="text-xl mb-8 text-blue-100">Лучшие привилегии для твоей игры</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <Card className="bg-white/10 backdrop-blur border-white/20">
+                <CardContent className="pt-6 text-center">
+                  <Icon name="Users" className="mx-auto mb-3 text-white" size={32} />
+                  <div className="text-3xl font-bold mb-1">{onlineCount}</div>
+                  <div className="text-sm text-blue-100">Игроков онлайн</div>
                 </CardContent>
               </Card>
               
-              <Card className="bg-card/80 backdrop-blur-lg border-secondary/30">
-                <CardContent className="p-4 flex items-center gap-3">
-                  <Icon name="Users" className="text-secondary" size={28} />
-                  <div className="text-left">
-                    <p className="text-sm text-muted-foreground font-medium">Онлайн</p>
-                    <p className="font-bold text-lg text-secondary">{onlineCount} игроков</p>
-                  </div>
+              <Card className="bg-white/10 backdrop-blur border-white/20">
+                <CardContent className="pt-6 text-center">
+                  <Icon name="Star" className="mx-auto mb-3 text-white" size={32} />
+                  <div className="text-3xl font-bold mb-1">{averageRating}</div>
+                  <div className="text-sm text-blue-100">Средний рейтинг</div>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white/10 backdrop-blur border-white/20">
+                <CardContent className="pt-6 text-center">
+                  <Icon name="Package" className="mx-auto mb-3 text-white" size={32} />
+                  <div className="text-3xl font-bold mb-1">{privileges.length}</div>
+                  <div className="text-sm text-blue-100">Привилегий</div>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="flex gap-4 justify-center pt-6">
-              <Button asChild size="lg" className="gradient-purple-pink hover:gradient-hover border-0 minecraft-shadow font-bold text-lg px-8">
-                <a href="https://t.me/HollyFunServer" target="_blank" rel="noopener noreferrer">
-                  <Icon name="Send" className="mr-2" size={20} />
-                  Telegram
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-2 border-primary/50 hover:bg-primary/20 font-bold text-lg px-8">
-                <a href="https://discord.gg/WBrBCpUbkc" target="_blank" rel="noopener noreferrer">
-                  <Icon name="MessageCircle" className="mr-2" size={20} />
-                  Discord
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-12">
-        <Card className="bg-gradient-to-br from-accent/20 to-primary/20 border-accent/30 backdrop-blur-lg minecraft-shadow">
-          <CardContent className="p-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="text-center md:text-left">
-                <h3 className="text-3xl font-bold mb-4">Общая оценка сервера</h3>
-                <div className="flex items-center gap-2 justify-center md:justify-start mb-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Icon key={star} name="Star" className="text-yellow-400 fill-yellow-400" size={32} />
-                  ))}
-                  <span className="text-5xl font-black ml-3 text-shadow">5.0</span>
-                </div>
-                <p className="text-muted-foreground text-lg">На основе {reviews.length} отзывов</p>
-              </div>
-              <div className="w-full md:w-auto space-y-3 min-w-[320px]">
-                <div className="flex items-center gap-3">
-                  <span className="text-base font-medium w-24">5 звёзд</span>
-                  <Progress value={(50 / 60) * 100} className="flex-1 h-3" />
-                  <span className="text-base font-bold w-12 text-right">50</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-base font-medium w-24">4 звезды</span>
-                  <Progress value={(10 / 60) * 100} className="flex-1 h-3" />
-                  <span className="text-base font-bold w-12 text-right">10</span>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="container mx-auto px-4 py-12">
-        <h2 className="text-4xl md:text-5xl font-black text-center mb-12 text-shadow">
-          <Icon name="Coins" className="inline mr-3 text-yellow-400" size={40} />
-          ИГРОВЫЕ ТОКЕНЫ
-        </h2>
-        <Card className="bg-gradient-to-br from-secondary/20 to-primary/20 border-secondary/30 backdrop-blur-lg max-w-md mx-auto minecraft-shadow">
-          <CardHeader>
-            <CardTitle className="text-3xl font-black">Токены RoomTime</CardTitle>
-            <CardDescription className="text-lg">Внутриигровая валюта сервера</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="text-center">
-              <div className="text-6xl font-black text-secondary text-shadow mb-4">1₽ = 1 TOKEN</div>
-              <p className="text-muted-foreground text-lg mb-6">Используйте токены для покупок на сервере</p>
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button className="w-full gradient-purple-pink hover:gradient-hover border-0 minecraft-shadow font-bold text-lg py-6" size="lg">
-                    <Icon name="ShoppingCart" className="mr-2" size={20} />
-                    Купить токены
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="text-2xl font-black">Покупка токенов</DialogTitle>
-                    <DialogDescription className="text-base">
-                      Введите ваш игровой никнейм для продолжения покупки
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 py-4">
-                    <div className="space-y-2">
-                      <label htmlFor="nickname" className="text-sm font-medium">
-                        Игровой никнейм
-                      </label>
-                      <Input
-                        id="nickname"
-                        placeholder="Ваш ник в Minecraft"
-                        value={nickname}
-                        onChange={(e) => setNickname(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handlePurchase()}
-                        className="text-base"
-                      />
-                    </div>
+            <Card className="bg-white/10 backdrop-blur border-white/20 mb-8">
+              <CardContent className="pt-6">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-100">IP сервера:</span>
+                    <span className="font-mono font-bold">RoomTime.gomc.me</span>
                   </div>
-                  <DialogFooter>
-                    <Button
-                      onClick={handlePurchase}
-                      className="w-full gradient-purple-pink hover:gradient-hover border-0 minecraft-shadow font-bold"
-                      size="lg"
-                    >
-                      Продолжить покупку
-                    </Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="container mx-auto px-4 py-12">
-        <h2 className="text-4xl md:text-5xl font-black text-center mb-12 text-shadow">
-          <Icon name="Crown" className="inline mr-3 text-yellow-400" size={40} />
-          ПРИВИЛЕГИИ
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {privileges.map((priv) => (
-            <Card 
-              key={priv.name} 
-              className={`bg-gradient-to-br ${priv.color} backdrop-blur-lg transition-all hover:scale-105 cursor-pointer minecraft-shadow hover:minecraft-shadow-sm ${
-                priv.popular ? 'ring-4 ring-accent' : 'border-primary/30'
-              }`}
-            >
-              {priv.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                  <Badge className="bg-accent text-white border-0 font-bold px-4 py-1 text-sm minecraft-shadow-sm">
-                    ⭐ ПОПУЛЯРНАЯ
-                  </Badge>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-100">Telegram:</span>
+                    <a href="https://t.me/HollyFunServer" target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">
+                      @HollyFunServer
+                    </a>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-blue-100">Discord:</span>
+                    <a href="https://discord.gg/WBrBCpUbkc" target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">
+                      discord.gg/WBrBCpUbkc
+                    </a>
+                  </div>
                 </div>
-              )}
-              <CardHeader className="pb-4">
-                <div className="flex items-start justify-between mb-2">
-                  <CardTitle className="text-2xl font-black text-shadow">{priv.name}</CardTitle>
-                  <Icon name="Shield" className="text-white/80" size={28} />
-                </div>
-                <CardDescription className="text-4xl font-black text-white text-shadow">
-                  ${priv.price}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="bg-black/30 rounded-lg p-4 mb-4 max-h-64 overflow-y-auto">
-                  <ul className="space-y-1.5 text-sm">
-                    {priv.features.map((feature, idx) => {
-                      if (feature === '') return <div key={idx} className="h-2" />;
-                      if (feature === 'Прочее:') return <p key={idx} className="font-bold text-white mt-2">{feature}</p>;
-                      return (
-                        <li key={idx} className="text-white/90 leading-relaxed">
-                          {feature}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                  <DialogTrigger asChild>
-                    <Button className="w-full bg-white/20 hover:bg-white/30 border-0 minecraft-shadow-sm font-bold backdrop-blur">
-                      <Icon name="ShoppingBag" className="mr-2" size={18} />
-                      Купить
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                      <DialogTitle className="text-2xl font-black">Покупка привилегии</DialogTitle>
-                      <DialogDescription className="text-base">
-                        Введите ваш игровой никнейм для продолжения покупки
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4 py-4">
-                      <div className="space-y-2">
-                        <label htmlFor="nickname" className="text-sm font-medium">
-                          Игровой никнейм
-                        </label>
-                        <Input
-                          id="nickname"
-                          placeholder="Ваш ник в Minecraft"
-                          value={nickname}
-                          onChange={(e) => setNickname(e.target.value)}
-                          onKeyDown={(e) => e.key === 'Enter' && handlePurchase()}
-                          className="text-base"
-                        />
-                      </div>
-                    </div>
-                    <DialogFooter>
-                      <Button
-                        onClick={handlePurchase}
-                        className="w-full gradient-purple-pink hover:gradient-hover border-0 minecraft-shadow font-bold"
-                        size="lg"
-                      >
-                        Продолжить покупку
-                      </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
               </CardContent>
             </Card>
-          ))}
-        </div>
-      </div>
 
-      <div className="container mx-auto px-4 py-12">
-        <h2 className="text-4xl md:text-5xl font-black text-center mb-12 text-shadow">
-          <Icon name="MessageSquare" className="inline mr-3 text-accent" size={40} />
-          ОТЗЫВЫ ДОНАТЕРОВ
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.slice(0, 12).map((review, idx) => (
-            <Card key={idx} className="bg-card/50 border-primary/20 backdrop-blur-lg hover:border-primary/40 transition-all">
-              <CardHeader>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-12 w-12">
-                      <AvatarFallback className="gradient-purple-pink text-white font-bold text-lg">
-                        {review.author[0]}
-                      </AvatarFallback>
-                    </Avatar>
-                    <CardTitle className="text-lg font-bold">{review.author}</CardTitle>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg font-bold text-lg px-8 py-6">
+                  <Icon name="ShoppingCart" className="mr-2" size={24} />
+                  Купить токены
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold">Покупка токенов</DialogTitle>
+                  <DialogDescription className="text-base">
+                    Введите ваш игровой никнейм для продолжения покупки
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                  <div className="space-y-2">
+                    <label htmlFor="nickname" className="text-sm font-medium">
+                      Игровой никнейм
+                    </label>
+                    <Input
+                      id="nickname"
+                      placeholder="Ваш ник в Minecraft"
+                      value={nickname}
+                      onChange={(e) => setNickname(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handlePurchase()}
+                      className="text-base"
+                    />
                   </div>
-                  <div className="flex gap-0.5">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Icon key={i} name="Star" className="text-yellow-400 fill-yellow-400" size={18} />
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <p className="text-sm text-blue-900">
+                      <Icon name="Info" className="inline mr-1" size={16} />
+                      Курс обмена: <strong>1₽ = 1 TOKEN</strong>
+                    </p>
+                  </div>
+                </div>
+                <DialogFooter>
+                  <Button
+                    onClick={handlePurchase}
+                    className="w-full gradient-purple-pink hover:gradient-hover font-bold"
+                    size="lg"
+                  >
+                    Продолжить покупку
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+      </section>
+
+      {/* Привилегии */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Выберите привилегию</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {privileges.map((privilege) => (
+              <Card key={privilege.name} className={`relative overflow-hidden hover:shadow-xl transition-all border ${privilege.popular ? 'ring-2 ring-blue-500' : ''}`}>
+                {privilege.popular && (
+                  <Badge className="absolute top-4 right-4 bg-blue-500 text-white">
+                    Популярное
+                  </Badge>
+                )}
+                
+                <CardHeader className="pb-4">
+                  <div className={`w-full h-2 rounded-full bg-gradient-to-r ${privilege.color} mb-4`} />
+                  <CardTitle className="text-2xl font-bold text-gray-900">{privilege.name}</CardTitle>
+                  <CardDescription>
+                    <span className="text-3xl font-bold text-gray-900">{privilege.price}₽</span>
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="space-y-3">
+                  <div className="space-y-1.5 text-sm max-h-64 overflow-y-auto">
+                    {privilege.features.map((feature, idx) => (
+                      <div key={idx} className={feature === '' ? 'h-2' : feature.startsWith('Прочее:') ? 'font-semibold mt-2 text-gray-900' : 'text-gray-700'}>
+                        {feature}
+                      </div>
                     ))}
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">{review.text}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        {reviews.length > 12 && (
-          <div className="text-center mt-10">
-            <Button variant="outline" size="lg" className="border-2 border-primary/50 hover:bg-primary/20 font-bold text-lg px-8">
-              Показать все {reviews.length} отзывов
-            </Button>
+                  
+                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogTrigger asChild>
+                      <Button className="w-full gradient-purple-pink hover:gradient-hover font-bold mt-4 shadow-md">
+                        <Icon name="ShoppingBag" className="mr-2" size={18} />
+                        Купить
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle className="text-2xl font-bold">Покупка привилегии</DialogTitle>
+                        <DialogDescription className="text-base">
+                          Введите ваш игровой никнейм для продолжения покупки
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 py-4">
+                        <div className="space-y-2">
+                          <label htmlFor="nickname" className="text-sm font-medium">
+                            Игровой никнейм
+                          </label>
+                          <Input
+                            id="nickname"
+                            placeholder="Ваш ник в Minecraft"
+                            value={nickname}
+                            onChange={(e) => setNickname(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handlePurchase()}
+                            className="text-base"
+                          />
+                        </div>
+                      </div>
+                      <DialogFooter>
+                        <Button
+                          onClick={handlePurchase}
+                          className="w-full gradient-purple-pink hover:gradient-hover font-bold"
+                          size="lg"
+                        >
+                          Продолжить покупку
+                        </Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        )}
-      </div>
-
-      <div className="container mx-auto px-4 py-12">
-        <h2 className="text-4xl md:text-5xl font-black text-center mb-12 text-shadow">
-          <Icon name="Users" className="inline mr-3 text-secondary" size={40} />
-          СОЗДАТЕЛИ СЕРВЕРА
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          {creators.map((creator) => (
-            <Card key={creator.name} className="bg-gradient-to-br from-secondary/20 to-primary/20 border-secondary/30 backdrop-blur-lg minecraft-shadow hover:scale-105 transition-all">
-              <CardContent className="p-8 text-center">
-                <Avatar className="w-24 h-24 mx-auto mb-4 ring-4 ring-primary/50">
-                  <AvatarFallback className="gradient-purple-pink text-white text-3xl font-black">
-                    {creator.name[0]}
-                  </AvatarFallback>
-                </Avatar>
-                <h3 className="text-2xl font-black text-shadow mb-2">{creator.name}</h3>
-                <p className="text-muted-foreground font-medium text-lg">{creator.role}</p>
-              </CardContent>
-            </Card>
-          ))}
         </div>
-      </div>
+      </section>
 
-      <footer className="border-t border-border/50 mt-16 bg-card/30 backdrop-blur">
-        <div className="container mx-auto px-4 py-10">
-          <div className="text-center space-y-6">
-            <div className="flex justify-center gap-6">
-              <Button asChild variant="ghost" size="lg" className="hover:bg-primary/20 font-bold">
-                <a href="https://t.me/HollyFunServer" target="_blank" rel="noopener noreferrer">
-                  <Icon name="Send" className="mr-2" size={20} />
-                  Telegram
-                </a>
-              </Button>
-              <Button asChild variant="ghost" size="lg" className="hover:bg-primary/20 font-bold">
-                <a href="https://discord.gg/WBrBCpUbkc" target="_blank" rel="noopener noreferrer">
-                  <Icon name="MessageCircle" className="mr-2" size={20} />
-                  Discord
-                </a>
-              </Button>
+      {/* Отзывы */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">Отзывы игроков</h2>
+            
+            <div className="flex items-center justify-center gap-6 mb-8">
+              <div className="text-center">
+                <div className="text-5xl font-bold text-gray-900 mb-2">{averageRating}</div>
+                <div className="flex gap-1 mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <Icon key={i} name="Star" className="text-yellow-400 fill-current" size={20} />
+                  ))}
+                </div>
+                <p className="text-sm text-gray-600">{reviews.length} отзывов</p>
+              </div>
+              
+              <div className="space-y-2 flex-1 max-w-xs">
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Icon key={i} name="Star" className="text-yellow-400 fill-current" size={14} />
+                    ))}
+                  </div>
+                  <Progress value={(fiveStarCount / reviews.length) * 100} className="flex-1" />
+                  <span className="text-sm text-gray-600 w-8">{fiveStarCount}</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-1">
+                    {[...Array(4)].map((_, i) => (
+                      <Icon key={i} name="Star" className="text-yellow-400 fill-current" size={14} />
+                    ))}
+                    <Icon name="Star" className="text-gray-300" size={14} />
+                  </div>
+                  <Progress value={(fourStarCount / reviews.length) * 100} className="flex-1" />
+                  <span className="text-sm text-gray-600 w-8">{fourStarCount}</span>
+                </div>
+              </div>
             </div>
-            <p className="text-muted-foreground text-lg">© 2024 RoomTime Minecraft Server. Все права защищены.</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2">
+              {reviews.map((review, idx) => (
+                <Card key={idx} className="bg-white border">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-3">
+                      <Avatar className="bg-gradient-to-br from-blue-400 to-blue-600">
+                        <AvatarFallback className="text-white font-bold">
+                          {review.author[0]}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-semibold text-gray-900">{review.author}</span>
+                          <div className="flex gap-0.5">
+                            {[...Array(5)].map((_, i) => (
+                              <Icon
+                                key={i}
+                                name="Star"
+                                className={i < review.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}
+                                size={14}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                        <p className="text-sm text-gray-700">{review.text}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Создатели */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Создатели сервера</h2>
+            
+            <div className="flex justify-center gap-8">
+              {creators.map((creator) => (
+                <Card key={creator.name} className="text-center border">
+                  <CardContent className="pt-6">
+                    <Avatar className="mx-auto mb-4 w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600">
+                      <AvatarFallback className="text-2xl text-white font-bold">
+                        {creator.name.substring(0, 2)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <h3 className="font-bold text-lg mb-1 text-gray-900">{creator.name}</h3>
+                    <p className="text-sm text-gray-600">{creator.role}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Футер */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+              <Icon name="Gamepad2" className="text-white" size={18} />
+            </div>
+            <span className="font-bold text-lg">RoomTime</span>
+          </div>
+          <p className="text-gray-400 text-sm mb-4">
+            © 2024 RoomTime Minecraft Server. Все права защищены.
+          </p>
+          <div className="flex justify-center gap-6 text-sm">
+            <a href="https://t.me/HollyFunServer" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              Telegram
+            </a>
+            <a href="https://discord.gg/WBrBCpUbkc" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              Discord
+            </a>
           </div>
         </div>
       </footer>
