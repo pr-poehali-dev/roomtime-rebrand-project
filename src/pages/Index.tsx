@@ -338,23 +338,23 @@ export default function Index() {
   const fourStarCount = reviews.filter(r => r.rating === 4).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-black via-neutral-950 to-black">
       {/* Хедер */}
-      <header className="bg-white border-b sticky top-0 z-50 shadow-sm">
+      <header className="bg-black/80 backdrop-blur-sm border-b border-red-900/50 sticky top-0 z-50 evil-shadow">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-red-900 rounded-lg flex items-center justify-center border-glow">
                 <Icon name="Gamepad2" className="text-white" size={24} />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">RoomTime</h1>
-                <p className="text-xs text-gray-500">Minecraft сервер</p>
+                <h1 className="text-xl font-bold text-red-500 text-shadow-red">RoomTime</h1>
+                <p className="text-xs text-red-400/70">Minecraft сервер</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+              <Badge variant="outline" className="bg-red-950/50 text-red-400 border-red-900">
+                <div className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></div>
                 {onlineCount} онлайн
               </Badge>
             </div>
@@ -363,11 +363,11 @@ export default function Index() {
       </header>
 
       {/* Главный баннер */}
-      <section className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-16">
+      <section className="bg-gradient-to-r from-red-950 via-black to-red-950 text-white py-16 border-y border-red-900/50 evil-shadow-lg">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-4">Донат магазин RoomTime</h2>
-            <p className="text-xl mb-8 text-blue-100">Лучшие привилегии для твоей игры</p>
+            <h2 className="text-4xl font-bold mb-4 text-shadow-red text-red-500">Донат магазин RoomTime</h2>
+            <p className="text-xl mb-8 text-red-300/80">Лучшие привилегии для твоей игры</p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <Card className="bg-white/10 backdrop-blur border-white/20">
@@ -395,21 +395,21 @@ export default function Index() {
               </Card>
             </div>
 
-            <Card className="bg-white/10 backdrop-blur border-white/20 mb-8">
+            <Card className="bg-black/40 backdrop-blur border-red-900/50 mb-8 evil-shadow">
               <CardContent className="pt-6">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-100">IP сервера:</span>
+                    <span className="text-red-300/70">IP сервера:</span>
                     <span className="font-mono font-bold">RoomTime.gomc.me</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-100">Telegram:</span>
+                    <span className="text-red-300/70">Telegram:</span>
                     <a href="https://t.me/HollyFunServer" target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">
                       @HollyFunServer
                     </a>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-blue-100">Discord:</span>
+                    <span className="text-red-300/70">Discord:</span>
                     <a href="https://discord.gg/WBrBCpUbkc" target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">
                       discord.gg/WBrBCpUbkc
                     </a>
@@ -420,7 +420,7 @@ export default function Index() {
 
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 shadow-lg font-bold text-lg px-8 py-6">
+                <Button size="lg" className="gradient-red-dark hover:gradient-hover border-glow font-bold text-lg px-8 py-6">
                   <Icon name="ShoppingCart" className="mr-2" size={24} />
                   Купить токены
                 </Button>
@@ -469,31 +469,31 @@ export default function Index() {
       </section>
 
       {/* Привилегии */}
-      <section className="py-16">
+      <section className="py-16 bg-gradient-to-b from-black to-neutral-950">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Выберите привилегию</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-red-500 text-shadow-red">Выберите привилегию</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {privileges.map((privilege) => (
-              <Card key={privilege.name} className={`relative overflow-hidden hover:shadow-xl transition-all border ${privilege.popular ? 'ring-2 ring-blue-500' : ''}`}>
+              <Card key={privilege.name} className={`relative overflow-hidden hover:evil-shadow-lg transition-all border-red-900/50 bg-neutral-950 ${privilege.popular ? 'border-glow' : ''}`}>
                 {privilege.popular && (
-                  <Badge className="absolute top-4 right-4 bg-blue-500 text-white">
+                  <Badge className="absolute top-4 right-4 bg-red-600 text-white border-glow">
                     Популярное
                   </Badge>
                 )}
                 
                 <CardHeader className="pb-4">
                   <div className={`w-full h-2 rounded-full bg-gradient-to-r ${privilege.color} mb-4`} />
-                  <CardTitle className="text-2xl font-bold text-gray-900">{privilege.name}</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-red-400">{privilege.name}</CardTitle>
                   <CardDescription>
-                    <span className="text-3xl font-bold text-gray-900">{privilege.price}₽</span>
+                    <span className="text-3xl font-bold text-red-500">{privilege.price}₽</span>
                   </CardDescription>
                 </CardHeader>
                 
                 <CardContent className="space-y-3">
                   <div className="space-y-1.5 text-sm max-h-64 overflow-y-auto">
                     {privilege.features.map((feature, idx) => (
-                      <div key={idx} className={feature === '' ? 'h-2' : feature.startsWith('Прочее:') ? 'font-semibold mt-2 text-gray-900' : 'text-gray-700'}>
+                      <div key={idx} className={feature === '' ? 'h-2' : feature.startsWith('Прочее:') ? 'font-semibold mt-2 text-red-400' : 'text-gray-400'}>
                         {feature}
                       </div>
                     ))}
@@ -501,7 +501,7 @@ export default function Index() {
                   
                   <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
-                      <Button className="w-full gradient-purple-pink hover:gradient-hover font-bold mt-4 shadow-md">
+                      <Button className="w-full gradient-red-dark hover:gradient-hover font-bold mt-4 border-glow">
                         <Icon name="ShoppingBag" className="mr-2" size={18} />
                         Купить
                       </Button>
@@ -531,7 +531,7 @@ export default function Index() {
                       <DialogFooter>
                         <Button
                           onClick={handlePurchase}
-                          className="w-full gradient-purple-pink hover:gradient-hover font-bold"
+                          className="w-full gradient-red-dark hover:gradient-hover font-bold border-glow"
                           size="lg"
                         >
                           Продолжить покупку
@@ -547,20 +547,20 @@ export default function Index() {
       </section>
 
       {/* Отзывы */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-neutral-950 border-y border-red-900/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">Отзывы игроков</h2>
+            <h2 className="text-3xl font-bold text-center mb-4 text-red-500 text-shadow-red">Отзывы игроков</h2>
             
             <div className="flex items-center justify-center gap-6 mb-8">
               <div className="text-center">
-                <div className="text-5xl font-bold text-gray-900 mb-2">{averageRating}</div>
+                <div className="text-5xl font-bold text-red-400 mb-2">{averageRating}</div>
                 <div className="flex gap-1 mb-2">
                   {[...Array(5)].map((_, i) => (
                     <Icon key={i} name="Star" className="text-yellow-400 fill-current" size={20} />
                   ))}
                 </div>
-                <p className="text-sm text-gray-600">{reviews.length} отзывов</p>
+                <p className="text-sm text-red-300/70">{reviews.length} отзывов</p>
               </div>
               
               <div className="space-y-2 flex-1 max-w-xs">
@@ -571,7 +571,7 @@ export default function Index() {
                     ))}
                   </div>
                   <Progress value={(fiveStarCount / reviews.length) * 100} className="flex-1" />
-                  <span className="text-sm text-gray-600 w-8">{fiveStarCount}</span>
+                  <span className="text-sm text-red-400 w-8">{fiveStarCount}</span>
                 </div>
                 
                 <div className="flex items-center gap-2">
@@ -582,24 +582,24 @@ export default function Index() {
                     <Icon name="Star" className="text-gray-300" size={14} />
                   </div>
                   <Progress value={(fourStarCount / reviews.length) * 100} className="flex-1" />
-                  <span className="text-sm text-gray-600 w-8">{fourStarCount}</span>
+                  <span className="text-sm text-red-400 w-8">{fourStarCount}</span>
                 </div>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto pr-2">
               {reviews.map((review, idx) => (
-                <Card key={idx} className="bg-white border">
+                <Card key={idx} className="bg-neutral-950 border-red-900/50">
                   <CardContent className="pt-6">
                     <div className="flex items-start gap-3">
-                      <Avatar className="bg-gradient-to-br from-blue-400 to-blue-600">
+                      <Avatar className="bg-gradient-to-br from-red-600 to-red-900">
                         <AvatarFallback className="text-white font-bold">
                           {review.author[0]}
                         </AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="font-semibold text-gray-900">{review.author}</span>
+                          <span className="font-semibold text-red-400">{review.author}</span>
                           <div className="flex gap-0.5">
                             {[...Array(5)].map((_, i) => (
                               <Icon
@@ -611,7 +611,7 @@ export default function Index() {
                             ))}
                           </div>
                         </div>
-                        <p className="text-sm text-gray-700">{review.text}</p>
+                        <p className="text-sm text-gray-400">{review.text}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -623,22 +623,22 @@ export default function Index() {
       </section>
 
       {/* Создатели */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-black">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900">Создатели сервера</h2>
+            <h2 className="text-3xl font-bold mb-8 text-red-500 text-shadow-red">Создатели сервера</h2>
             
             <div className="flex justify-center gap-8">
               {creators.map((creator) => (
-                <Card key={creator.name} className="text-center border">
+                <Card key={creator.name} className="text-center border-red-900/50 bg-neutral-950">
                   <CardContent className="pt-6">
-                    <Avatar className="mx-auto mb-4 w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600">
+                    <Avatar className="mx-auto mb-4 w-20 h-20 bg-gradient-to-br from-red-600 to-red-900 border-glow">
                       <AvatarFallback className="text-2xl text-white font-bold">
                         {creator.name.substring(0, 2)}
                       </AvatarFallback>
                     </Avatar>
-                    <h3 className="font-bold text-lg mb-1 text-gray-900">{creator.name}</h3>
-                    <p className="text-sm text-gray-600">{creator.role}</p>
+                    <h3 className="font-bold text-lg mb-1 text-red-400">{creator.name}</h3>
+                    <p className="text-sm text-red-300/70">{creator.role}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -648,22 +648,22 @@ export default function Index() {
       </section>
 
       {/* Футер */}
-      <footer className="bg-gray-900 text-white py-8">
+      <footer className="bg-black border-t border-red-900/50 text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-red-600 to-red-900 rounded-lg flex items-center justify-center border-glow">
               <Icon name="Gamepad2" className="text-white" size={18} />
             </div>
-            <span className="font-bold text-lg">RoomTime</span>
+            <span className="font-bold text-lg text-red-400">RoomTime</span>
           </div>
-          <p className="text-gray-400 text-sm mb-4">
+          <p className="text-red-400/60 text-sm mb-4">
             © 2024 RoomTime Minecraft Server. Все права защищены.
           </p>
           <div className="flex justify-center gap-6 text-sm">
-            <a href="https://t.me/HollyFunServer" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+            <a href="https://t.me/HollyFunServer" target="_blank" rel="noopener noreferrer" className="text-red-400/70 hover:text-red-400 transition-colors">
               Telegram
             </a>
-            <a href="https://discord.gg/WBrBCpUbkc" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+            <a href="https://discord.gg/WBrBCpUbkc" target="_blank" rel="noopener noreferrer" className="text-red-400/70 hover:text-red-400 transition-colors">
               Discord
             </a>
           </div>
